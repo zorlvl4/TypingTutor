@@ -3,49 +3,78 @@ package com.mycompany.ziptestdemo.typingtutor;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
-/**
- * JavaFX App
- */
 public class App extends Application {
-    private int currentText = 0;
+
+    private String currentText;
     private int correct = 0;
     private int incorrect = 0;
-    
+
+    private boolean shiftPressed = false;
+
+    private String[] texts = {
+        "Try typing this text. Do it as quickly and as accurately as you can.",
+        "Next type another line of input data.",
+        "The quick brown fox jumps over the lazy dog.",
+        "Five big quacking zephyrs jolt my wax bed.",
+        "Sympathizing would fix Quaker objectives.",
+        "A large fawn jumped quickly over the white zinc boxes."
+    };
+
     @Override
     public void start(Stage stage) {
-        TextField inputTextField = new TextField();
-        inputTextField.setEditable(false);
-        
-        TextField typedTextField = new TextField();
-        typedTextField.setEditable(false);
-        
-        Label keyPressedLabel = new Label("Key pressed: None");
-        
+
+        currentText = texts[0];
+
+        Label textLabel = new Label("Text to type");
+        TextField text = new TextField(currentText);
+        text.setEditable(false);
+
+        Label responseLabel = new Label("Your response");
+        TextField response = new TextField();
+        response.setEditable(false);
+
+        Label counterLabel = new Label("1 of 6");
+        Label keyPressedLabel = new Label("Key pressed: ");
         Label correctLabel = new Label("Correct: 0");
         Label incorrectLabel = new Label("Incorrect: 0");
-        
+
         Button nextButton = new Button("Next");
         Button resetButton = new Button("Reset");
-        
-        HBox controlBox = new HBox(15, nextButton, resetButton);
-        controlBox.setAlignment(Pos.CENTER);
-        
-        HBox statisticsBox = new HBox(30, correctLabel, incorrectLabel);
-        statisticsBox.setAlignment(Pos.CENTER);
-        
+
+        VBox root = new VBox(10);
+        root.setPadding(new Insets(15));
+        root.setAlignment(Pos.CENTER);
+
+        HBox information = new HBox(15);
+        information.setAlignment(Pos.CENTER);
+
+        information.getChildren().addAll(
+                counterLabel,
+                nextButton,
+                resetButton,
+                keyPressedLabel,
+                correctLabel,
+                incorrectLabel
+        );
+
+        /*
+         * Map connects a physical keyboard key to its
+         * matching virtual button.
+         */
         Map<KeyCode, Button> keyboard = new HashMap<>();
-        
+
+        // First row
         Button q = new Button("Q");
         Button w = new Button("W");
         Button e = new Button("E");
@@ -56,7 +85,87 @@ public class App extends Application {
         Button i = new Button("I");
         Button o = new Button("O");
         Button p = new Button("P");
-        
+
+        HBox row1 = new HBox(5);
+        row1.setAlignment(Pos.CENTER);
+        row1.getChildren().addAll(q, w, e, r, t, y, u, i, o, p);
+
+        // Second row
+        Button a = new Button("A");
+        Button s = new Button("S");
+        Button d = new Button("D");
+        Button f = new Button("F");
+        Button g = new Button("G");
+        Button h = new Button("H");
+        Button j = new Button("J");
+        Button k = new Button("K");
+        Button l = new Button("L");
+
+        HBox row2 = new HBox(5);
+        row2.setAlignment(Pos.CENTER);
+        row2.getChildren().addAll(a, s, d, f, g, h, j, k, l);
+
+        // Third row
+        Button shiftLeft = new Button("Shift");
+        Button z = new Button("Z");
+        Button x = new Button("X");
+        Button c = new Button("C");
+        Button v = new Button("V");
+        Button b = new Button("B");
+        Button n = new Button("N");
+        Button m = new Button("M");
+        Button shiftRight = new Button("Shift");
+
+        HBox row3 = new HBox(5);
+        row3.setAlignment(Pos.CENTER);
+        row3.getChildren().addAll(
+                shiftLeft, z, x, c, v, b, n, m, shiftRight
+        );
+
+        // Fourth row
+        Button backspace = new Button("Backspace");
+        Button space = new Button("Space");
+
+        HBox row4 = new HBox(5);
+        row4.setAlignment(Pos.CENTER);
+        row4.getChildren().addAll(backspace, space);
+
+        // Make the buttons larger
+        q.setPrefSize(50, 40);
+        w.setPrefSize(50, 40);
+        e.setPrefSize(50, 40);
+        r.setPrefSize(50, 40);
+        t.setPrefSize(50, 40);
+        y.setPrefSize(50, 40);
+        u.setPrefSize(50, 40);
+        i.setPrefSize(50, 40);
+        o.setPrefSize(50, 40);
+        p.setPrefSize(50, 40);
+
+        a.setPrefSize(50, 40);
+        s.setPrefSize(50, 40);
+        d.setPrefSize(50, 40);
+        f.setPrefSize(50, 40);
+        g.setPrefSize(50, 40);
+        h.setPrefSize(50, 40);
+        j.setPrefSize(50, 40);
+        k.setPrefSize(50, 40);
+        l.setPrefSize(50, 40);
+
+        shiftLeft.setPrefSize(80, 40);
+        shiftRight.setPrefSize(80, 40);
+
+        z.setPrefSize(50, 40);
+        x.setPrefSize(50, 40);
+        c.setPrefSize(50, 40);
+        v.setPrefSize(50, 40);
+        b.setPrefSize(50, 40);
+        n.setPrefSize(50, 40);
+        m.setPrefSize(50, 40);
+
+        backspace.setPrefSize(100, 40);
+        space.setPrefSize(250, 40);
+
         keyboard.put(KeyCode.Q, q);
         keyboard.put(KeyCode.W, w);
         keyboard.put(KeyCode.E, e);
@@ -67,10 +176,68 @@ public class App extends Application {
         keyboard.put(KeyCode.I, i);
         keyboard.put(KeyCode.O, o);
         keyboard.put(KeyCode.P, p);
+
+        keyboard.put(KeyCode.A, a);
+        keyboard.put(KeyCode.S, s);
+        keyboard.put(KeyCode.D, d);
+        keyboard.put(KeyCode.F, f);
+        keyboard.put(KeyCode.G, g);
+        keyboard.put(KeyCode.H, h);
+        keyboard.put(KeyCode.J, j);
+        keyboard.put(KeyCode.K, k);
+        keyboard.put(KeyCode.L, l);
+
+        keyboard.put(KeyCode.Z, z);
+        keyboard.put(KeyCode.X, x);
+        keyboard.put(KeyCode.C, c);
+        keyboard.put(KeyCode.V, v);
+        keyboard.put(KeyCode.B, b);
+        keyboard.put(KeyCode.N, n);
+        keyboard.put(KeyCode.M, m);
+
+        keyboard.put(KeyCode.SPACE, space);
+        keyboard.put(KeyCode.BACK_SPACE, backspace);
+        keyboard.put(KeyCode.SHIFT, shiftLeft);
+
+        q.setFocusTraversable(false);
+        w.setFocusTraversable(false);
+        e.setFocusTraversable(false);
+        r.setFocusTraversable(false);
+        t.setFocusTraversable(false);
+        y.setFocusTraversable(false);
+        u.setFocusTraversable(false);
+        i.setFocusTraversable(false);
+        o.setFocusTraversable(false);
+        p.setFocusTraversable(false);
+
+        a.setFocusTraversable(false);
+        s.setFocusTraversable(false);
+        d.setFocusTraversable(false);
+        f.setFocusTraversable(false);
+        g.setFocusTraversable(false);
+        h.setFocusTraversable(false);
+        j.setFocusTraversable(false);
+        k.setFocusTraversable(false);
+        l.setFocusTraversable(false);
+
+        z.setFocusTraversable(false);
+        x.setFocusTraversable(false);
+        c.setFocusTraversable(false);
+        v.setFocusTraversable(false);
+        b.setFocusTraversable(false);
+        n.setFocusTraversable(false);
+        m.setFocusTraversable(false);
+
+        shiftLeft.setFocusTraversable(false);
+        shiftRight.setFocusTraversable(false);
+        backspace.setFocusTraversable(false);
+        space.setFocusTraversable(false);
+
+     
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
-
 }
+
