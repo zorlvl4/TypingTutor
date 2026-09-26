@@ -365,9 +365,9 @@ public class App extends Application {
        nextButton.setOnAction(event -> {
             int next = 0;
             
-            for (int i = 0; i < texts.length; i++) { 
-                if (texts[i].equals(currentText)) { 
-                    next = i + 1;
+            for (int idx = 0; idx < texts.length; idx++) { 
+                if (texts[idx].equals(currentText)) { 
+                    next = idx + 1;
                     break; 
                 } 
             } 
@@ -422,7 +422,16 @@ public class App extends Application {
            root.requestFocus();
        });
        
+       VBox keyboardBox = new VBox(8);
+       keyboardBox.setAlignment(Pos.CENTER); 
+       keyboardBox.getChildren().addAll( row1, row2, row3, row4 );
+       root.getChildren().addAll( textLabel, text, responseLabel, response, information, keyboardBox );
        
+       Scene scene = new Scene(root, 1000, 600); 
+       stage.setTitle("Typing Tutor"); 
+       stage.setScene(scene); 
+       stage.show(); 
+       root.requestFocus();
     }
         
     public static void main(String[] args) {
