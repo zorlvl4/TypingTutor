@@ -291,8 +291,77 @@ public class App extends Application {
        });
        
        root.setOnKeyPressed(event -> {
+           KeyCode key = event.getCode();
            
+           if (keyboard.containsKey(key)) { 
+               keyboard.get(key).setStyle( 
+                       "-fx-background-color: lightblue;" 
+               ); 
+               
+               keyPressedLabel.setText( 
+                       "Key pressed: " + event.getText() 
+               ); 
+           } else { 
+               keyPressedLabel.setText( 
+                       "Key pressed: Not handled" 
+               ); 
+               keyPressedLabel.setStyle("-fx-text-fill: red;"); 
+           }
+           
+           if (key == KeyCode.SHIFT) { 
+               shiftPressed = true; 
+               shiftLeft.setStyle("-fx-background-color: lightblue;"); 
+               shiftRight.setStyle("-fx-background-color: lightblue;"); 
+           }
+           
+           if (key == KeyCode.BACK_SPACE) {
+               if (response.getText().length() > 0) { 
+                   String removed = response.getText().substring( 
+                           response.getText().length() - 1 
+                   );
+                   response.deleteText( 
+                           response.getText().length() - 1, 
+                           response.getText().length() 
+                   ); 
+                   
+                   int position = response.getText().length(); 
+                   
+                    if (position < currentText.length()) { 
+                       if (removed.equals( 
+                               String.valueOf(currentText.charAt(position)))) { 
+                           correct--;
+                    } else { 
+                           incorrect--;
+                    }
+                }
+               
+                correctLabel.setText("Correct: " + correct); 
+                incorrectLabel.setText("Incorrect: " + incorrect);
+            }
+           
+           return;
        }
+           
+           String character = event.getText();
+       
+            if (character != null 
+                    && character.length() > 0 
+                    && response.getText().length() < currentText.length()) { 
+                 response.appendText(character);
+                 int position = response.getText().length() - 1; 
+
+                 if (character.charAt(0) == currentText.charAt(position)) { 
+                     correct++;
+                 } 
+                 else { 
+                     incorrect++;
+                 } 
+
+                 correctLabel.setText("Correct: " + correct); 
+                 incorrectLabel.setText("Incorrect: " + incorrect); 
+            }
+        });
+       
     }
         
     public static void main(String[] args) {
