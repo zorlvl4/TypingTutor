@@ -399,7 +399,30 @@ public class App extends Application {
            }  
            root.requestFocus();
         });
-   
+       
+       resetButton.setOnAction(event -> {
+           currentText = texts[0]; 
+           text.setText(currentText); 
+           response.clear(); 
+           correct = 0; 
+           incorrect = 0; 
+           correctLabel.setText("Correct: 0"); 
+           incorrectLabel.setText("Incorrect: 0"); 
+           counterLabel.setText("1 of " + texts.length); 
+           keyPressedLabel.setText("Key pressed: "); 
+           keyPressedLabel.setStyle(""); 
+           shiftPressed = false; 
+           shiftLeft.setStyle(""); 
+           shiftRight.setStyle("");
+           
+           for (Button button : keyboard.values()) { 
+               button.setStyle("");
+           } 
+           
+           root.requestFocus();
+       });
+       
+       
     }
         
     public static void main(String[] args) {
