@@ -362,6 +362,44 @@ public class App extends Application {
             }
         });
        
+       nextButton.setOnAction(event -> {
+            int next = 0;
+            
+            for (int i = 0; i < texts.length; i++) { 
+                if (texts[i].equals(currentText)) { 
+                    next = i + 1;
+                    break; 
+                } 
+            } 
+          
+            if (next >= texts.length) { 
+                next = 0;
+            }
+            
+            currentText = texts[next]; 
+            text.setText(currentText); 
+            response.clear(); 
+            correct = 0; 
+            incorrect = 0; 
+            correctLabel.setText("Correct: 0");
+            incorrectLabel.setText("Incorrect: 0");
+            
+           counterLabel.setText( 
+                   (next + 1) + " of " + texts.length 
+           ); 
+           
+           keyPressedLabel.setText("Key pressed: "); 
+           keyPressedLabel.setStyle(""); 
+           shiftPressed = false; 
+           shiftLeft.setStyle(""); 
+           shiftRight.setStyle("");
+           
+           for (Button button : keyboard.values()) { 
+               button.setStyle("");
+           }  
+           root.requestFocus();
+        });
+   
     }
         
     public static void main(String[] args) {
