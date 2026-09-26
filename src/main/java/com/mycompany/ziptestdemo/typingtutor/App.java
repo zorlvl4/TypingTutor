@@ -260,8 +260,41 @@ public class App extends Application {
        m.setOnAction(event -> response.appendText(shiftPressed ? "M" : "m"));
        
        space.setOnAction(event -> response.appendText(" "));
+       
+       backspace.setOnAction(event -> { 
+           if (response.getText().length() > 0) { 
+               response.deleteText( 
+                       response.getText().length() - 1, 
+                       response.getText().length() 
+               ); 
+           } 
+       });
+       
+       shiftLeft.setOnAction(event -> { 
+           shiftPressed = !shiftPressed; if (shiftPressed) { 
+               shiftLeft.setStyle("-fx-background-color: lightblue;"); 
+               shiftRight.setStyle("-fx-background-color: lightblue;"); 
+           } else { 
+               shiftLeft.setStyle(""); 
+               shiftRight.setStyle(""); 
+           } 
+       });
+       
+       shiftRight.setOnAction(event -> { 
+           shiftPressed = !shiftPressed; if (shiftPressed) { 
+               shiftLeft.setStyle("-fx-background-color: lightblue;"); 
+               shiftRight.setStyle("-fx-background-color: lightblue;"); } 
+           else { 
+               shiftLeft.setStyle(""); 
+               shiftRight.setStyle(""); 
+           } 
+       });
+       
+       root.setOnKeyPressed(event -> {
+           
+       }
     }
-
+        
     public static void main(String[] args) {
         launch(args);
     }
