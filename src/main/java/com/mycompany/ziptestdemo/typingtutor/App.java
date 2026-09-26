@@ -130,7 +130,6 @@ public class App extends Application {
         row4.setAlignment(Pos.CENTER);
         row4.getChildren().addAll(backspace, space);
 
-        // Make the buttons larger
         q.setPrefSize(50, 40);
         w.setPrefSize(50, 40);
         e.setPrefSize(50, 40);
@@ -232,8 +231,35 @@ public class App extends Application {
         shiftRight.setFocusTraversable(false);
         backspace.setFocusTraversable(false);
         space.setFocusTraversable(false);
-
-     
+        
+       q.setOnAction(event -> response.appendText(shiftPressed ? "Q" : "q")); 
+       w.setOnAction(event -> response.appendText(shiftPressed ? "W" : "w")); 
+       e.setOnAction(event -> response.appendText(shiftPressed ? "E" : "e")); 
+       r.setOnAction(event -> response.appendText(shiftPressed ? "R" : "r")); 
+       t.setOnAction(event -> response.appendText(shiftPressed ? "T" : "t")); 
+       y.setOnAction(event -> response.appendText(shiftPressed ? "Y" : "y")); 
+       u.setOnAction(event -> response.appendText(shiftPressed ? "U" : "u")); 
+       i.setOnAction(event -> response.appendText(shiftPressed ? "I" : "i")); 
+       o.setOnAction(event -> response.appendText(shiftPressed ? "O" : "o")); 
+       p.setOnAction(event -> response.appendText(shiftPressed ? "P" : "p")); 
+       a.setOnAction(event -> response.appendText(shiftPressed ? "A" : "a")); 
+       s.setOnAction(event -> response.appendText(shiftPressed ? "S" : "s")); 
+       d.setOnAction(event -> response.appendText(shiftPressed ? "D" : "d")); 
+       f.setOnAction(event -> response.appendText(shiftPressed ? "F" : "f")); 
+       g.setOnAction(event -> response.appendText(shiftPressed ? "G" : "g")); 
+       h.setOnAction(event -> response.appendText(shiftPressed ? "H" : "h")); 
+       j.setOnAction(event -> response.appendText(shiftPressed ? "J" : "j")); 
+       k.setOnAction(event -> response.appendText(shiftPressed ? "K" : "k")); 
+       l.setOnAction(event -> response.appendText(shiftPressed ? "L" : "l")); 
+       z.setOnAction(event -> response.appendText(shiftPressed ? "Z" : "z")); 
+       x.setOnAction(event -> response.appendText(shiftPressed ? "X" : "x")); 
+       c.setOnAction(event -> response.appendText(shiftPressed ? "C" : "c")); 
+       v.setOnAction(event -> response.appendText(shiftPressed ? "V" : "v")); 
+       b.setOnAction(event -> response.appendText(shiftPressed ? "B" : "b")); 
+       n.setOnAction(event -> response.appendText(shiftPressed ? "N" : "n")); 
+       m.setOnAction(event -> response.appendText(shiftPressed ? "M" : "m"));
+       
+       space.setOnAction(event -> response.appendText(" "));
     }
 
     public static void main(String[] args) {
